@@ -2,18 +2,19 @@ package com.morhop.utils;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
-import java.util.List;
-
+/**
+ * @author BingKeh
+ * 2018/2/2 15:48
+ */
 
 public class NumToZh {
 
     // final variables for looking up
     private final static String CHINESE_NUMERIC = "零壹贰叁肆伍陆柒捌玖";
     private final static String[] DIGITS = { "元拾佰仟万", "万拾佰仟", "亿拾佰仟", "万拾佰仟", "兆"};
-    private final static String NEGATIVE_DIGITS = "分角";
+    private final static String NEGATIVE_DIGITS = " 分角";
     private final static String SPECIAL_UNITS = "元万亿";
-    final static String UNIT = "角分整";
+    private final static String UNIT = "角分整";
 
     
     /**
@@ -85,23 +86,35 @@ public class NumToZh {
         String output = "";
         StringBuilder builder = new StringBuilder(output);
         long integer = (long) money;
-        List<Byte> numList = new ArrayList<>();
+
+        // place * in to avoid the precision loss
+        short decimal = (short) ((money  * 100 - integer  * 100));
         byte b;
         int index = 0;
         while (integer / 10 != 0) {
             b = (byte) (integer % 10);
-            numList.add(b);
             builder.insert(0, getChinese(index, b));
             integer = integer / 10;
             index++;
         }
         b = (byte) (integer % 10);
-        numList.add(b);
         builder.insert(0, getChinese(index, b));
 
-        short decimal = (short) ((money - integer) * 10);
         output = builder.toString().replace(" ", "");
         output = trimZero(output, 0);
-        return output;
+
+        builder.delete(0, builder.length());
+        if (decimal != 0) {
+            for (int i = 1; i <= 2; i++) {
+                builder.insert(0, getChinese(-i, (byte) (decimal % 10)));
+                decimal /= 10;
+            }
+
+        } else {
+            builder.append(UNIT.charAt(2));
+        }
+        builder.insert(0, output);
+
+        return builder.toString();
     }
 }
