@@ -43,8 +43,6 @@ public class BitmapUtil {
     {
         if (origin == null)
             return null;
-        int width = origin.getWidth();
-        int height = origin.getHeight();
         Bitmap rotatedBM = Bitmap.createBitmap(origin, rect.left, rect.top, rect.width(), rect.height(), null, false);
         if (rotatedBM.equals(origin))
             return rotatedBM;
