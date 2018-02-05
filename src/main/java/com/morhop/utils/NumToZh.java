@@ -1,7 +1,5 @@
 package com.morhop.utils;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * @author BingKeh
  * 2018/2/2 15:48
@@ -24,7 +22,7 @@ public class NumToZh {
      * @param fromIndex the index to start the trim
      * @return the string has been trim, only trim the first block in a single flow
      */
-    private static String trimZero(@NotNull String input, int fromIndex) {
+    private static String trimZero(String input, int fromIndex) {
         int startIndex  = input.indexOf('零', fromIndex);
 
         // if there's no '零' in the string return the final output

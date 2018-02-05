@@ -1,8 +1,5 @@
 package com.morhop.utils;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -36,7 +33,7 @@ public class DigestUtil {
      * @throws UnsupportedEncodingException throw unsupported character set
      * @throws NoSuchAlgorithmException throw if there is no md5 algorithm
      */
-    public static String getMD5(String str, @Nullable String charsetName) throws UnsupportedEncodingException, NoSuchAlgorithmException {
+    public static String getMD5(String str, String charsetName) throws UnsupportedEncodingException, NoSuchAlgorithmException {
         if (charsetName == null)
             charsetName = DEFAULT_CHARACTER_SET;
         return toHex(getMD5(str.getBytes(charsetName)));
@@ -75,7 +72,6 @@ public class DigestUtil {
      * @param bytes bytes to be formatted
      * @return the formatted string in hex
      */
-    @NotNull
     protected static String toHex(byte... bytes) {
         StringBuilder sBuilder = new StringBuilder();
         for (byte b : bytes) {

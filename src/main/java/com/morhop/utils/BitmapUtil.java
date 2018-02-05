@@ -1,10 +1,10 @@
 package com.morhop.utils;
 
+
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.Rect;
 import android.graphics.RectF;
-
 
 /**
  * <p>Bitmap Util use android build in Bitmap and Matrix</p>
